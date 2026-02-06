@@ -1,0 +1,51 @@
+<Window x:Class="nsquare.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:nsquare"
+        mc:Ignorable="d"
+        Title="K2 전차 핸들 모니터" Height="350" Width="500">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="Azimuth:" FontSize="16" FontWeight="Bold" Margin="0,10,0,10"/>
+        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Azimuth, StringFormat={}{0:F2}°}" FontSize="16" Margin="10,10,0,10"/>
+
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Elevation:" FontSize="16" FontWeight="Bold" Margin="0,10,0,10"/>
+        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Elevation, StringFormat={}{0:F2}°}" FontSize="16" Margin="10,10,0,10"/>
+
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Is Firing:" FontSize="16" FontWeight="Bold" Margin="0,10,0,10"/>
+        <TextBlock Grid.Row="2" Grid.Column="1" FontSize="16" Margin="10,10,0,10">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Text" Value="No"/>
+                    <Setter Property="Foreground" Value="Green"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsFiring}" Value="True">
+                            <Setter Property="Text" Value="Yes"/>
+                            <Setter Property="Foreground" Value="Red"/>
+                            <Setter Property="FontWeight" Value="Bold"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="Voltage:" FontSize="16" FontWeight="Bold" Margin="0,10,0,10"/>
+        <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Voltage, StringFormat={}{0:F2}V}" FontSize="16" Margin="10,10,0,10"/>
+
+        <TextBlock Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Text="UDP 9999 포트에서 수신 중..." 
+                   FontSize="12" Foreground="Gray" Margin="0,20,0,0" HorizontalAlignment="Center"/>
+    </Grid>
+</Window>
